@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
 
 class StudentController extends Controller
 {
@@ -34,7 +35,17 @@ class StudentController extends Controller
     }*/
         public function addData()
         {
-            DB::table('students')->insert([
+
+        $item = new Student();
+        $item->name = "tester";
+        $item->email = "tester@gmail.com";
+        $item->age = 25;
+        $item->date_of_birth = '2010-01-01';
+        $item->gender = 'f';
+        $item->score = 66;
+        $item->user_id = 9;
+        $item->save();
+           /*  DB::table('students')->insert([
             [
                 'name'=>'tester',
                 'email'=>'tester@gmail.com',
@@ -67,30 +78,39 @@ class StudentController extends Controller
                 'gender'=>'f',
                 'user_id'=>11
             ]
-            ]);
+            ]); */
 
             return 'added Successfully';
         }
 
         public function getData()
         {
-            $items = DB::table('students')
+            //$items = DB::table('students')
             //->limit(10)
             //->first();   # return output in a object 
             //->where('id',104)
             //->orWhere('id',105)
             //->select('id','name')
             //->get();      # return output in a array 
-           ->count();
+            //->count();
+            //->max('score');
+            //->min('score');
+            //->avg('score');
 
+            $items = Student:://select('id','name')//->get()
+                    //->where('id',55)->first();
+                    //->
+                    find(55);
             return $items;
         }
 
         public function updateData()
         {
-            DB::table('students')->where('id',102)->update([
+           /*  DB::table('students')->where('id',102)->update([
                 'name'=>'update name',
-            ]);
+            ]); */
+
+            
 
             return 'updated successfully';
         }
